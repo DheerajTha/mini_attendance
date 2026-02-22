@@ -38,7 +38,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 
 mongoose.connect(process.env.MONGO_URI,{
   tls: true,
