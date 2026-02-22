@@ -6,6 +6,12 @@ import authRoutes from "./routes/authRoutes.js";
 import attendanceRoutes from "./routes/attendanceRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
 
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 dotenv.config()
 const port = process.env.PORT
 const app = express()
@@ -20,10 +26,9 @@ mongoose.connect(process.env.MONGO_URI,{
 .then(() => console.log("mongoDb Connect Success") )
 .catch((err) => console.log(err))
 
-app.get("/check", (req, res) => {
+app.get("/", (req, res) => {
   res.send("SERVER WORKING WIH NODEMON");
 });
-
 
 app.use("/api/auth", authRoutes);
 app.use("/api/attendance", attendanceRoutes);
