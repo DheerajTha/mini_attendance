@@ -34,6 +34,15 @@ app.use("/api/auth", authRoutes);
 app.use("/api/attendance", attendanceRoutes);
 app.use("/api/tasks", taskRoutes);
 
+// Fallback for client-side routing (SPA)
+app.use((req, res, next) => {
+  if (!req.path.startsWith('/api')) {
+    res.status(404).json({ message: "Not Found" });
+  } else {
+    next();
+  }
+});
+
 app.listen(port , () => {
     console.log(`server is running on port ${port}`)
 })
