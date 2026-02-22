@@ -16,7 +16,29 @@ dotenv.config()
 const port = process.env.PORT
 const app = express()
 app.use(express.json())
-app.use(cors())
+
+// Enhanced CORS configuration
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'https://mini-attendance-z2xs.vercel.app',
+      'https://mini-attendance-z2xs-git-main-dheerajthas-projects.vercel.app'
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 mongoose.connect(process.env.MONGO_URI,{
   tls: true,
