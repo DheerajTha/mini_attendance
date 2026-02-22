@@ -14,7 +14,7 @@ export default function AttendanceHistory() {
 
   return (
     <div className="bg-white p-4 rounded shadow mb-6">
-      <h2 className="text-xl font-semibold mb-2">Attendance History</h2>
+      <h2 className="text-xl font-semibold mb-2">Attendance History only day Record</h2>
       <ul className="space-y-1">
         {records.map((r) => (
           <li key={r._id} className="text-gray-700">

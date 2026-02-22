@@ -29,41 +29,45 @@ export default function CheckInOut() {
   };
 
   return (
-    <div className="bg-white p-6 rounded shadow mb-6">
-      <h2 className="text-xl font-semibold mb-4">Today Attendance</h2>
+    <div className="bg-white p-6 rounded-2xl shadow-md mb-6">
+  <h2 className="text-xl font-semibold mb-4 text-gray-800">Today Attendance</h2>
 
-      <div className="flex gap-4 mb-4">
-        <button
-          onClick={checkIn}
-          className="bg-green-600 text-white px-4 py-2 rounded"
-          disabled={attendance?.checkIn}
-        >
-          {loading ? "..." : "Check In"}
-        </button>
+  {/* Buttons */}
+  <div className="flex gap-4 mb-4">
+    <button
+      onClick={checkIn}
+      className={`flex-1 py-2 rounded-xl font-semibold text-white transition 
+        ${attendance?.checkIn ? "bg-green-300 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"}`}
+      disabled={attendance?.checkIn}
+    >
+      {loading ? "..." : "Check In"}
+    </button>
 
-        <button
-          onClick={checkOut}
-          className="bg-red-600 text-white px-4 py-2 rounded"
-          disabled={!attendance?.checkIn || attendance?.checkOut}
-        >
-          {loading ? "..." : "Check Out"}
-        </button>
-      </div>
+    <button
+      onClick={checkOut}
+      className={`flex-1 py-2 rounded-xl font-semibold text-white transition
+        ${!attendance?.checkIn || attendance?.checkOut
+          ? "bg-red-300 cursor-not-allowed"
+          : "bg-red-600 hover:bg-red-700"
+        }`}
+      disabled={!attendance?.checkIn || attendance?.checkOut}
+    >
+      {loading ? "..." : "Check Out"}
+    </button>
+  </div>
 
-      {attendance && (
-        <div className="text-gray-700 space-y-1">
-          <p>Date: {new Date(attendance.date).toLocaleDateString()}</p>
-          {attendance.checkIn && (
-            <p>Check In: {new Date(attendance.checkIn).toLocaleTimeString()}</p>
-          )}
-          {attendance.checkOut && (
-            <p>
-              Check Out:{" "}
-              {new Date(attendance.checkOut).toLocaleTimeString()}
-            </p>
-          )}
-        </div>
+  {/* Attendance Info */}
+  {attendance && (
+    <div className="text-gray-700 space-y-2 border-t border-gray-200 pt-3">
+      <p><span className="font-semibold">Date:</span> {new Date(attendance.date).toLocaleDateString()}</p>
+      {attendance.checkIn && (
+        <p><span className="font-semibold">Check In:</span> {new Date(attendance.checkIn).toLocaleTimeString()}</p>
+      )}
+      {attendance.checkOut && (
+        <p><span className="font-semibold">Check Out:</span> {new Date(attendance.checkOut).toLocaleTimeString()}</p>
       )}
     </div>
+  )}
+</div>
   );
 }
