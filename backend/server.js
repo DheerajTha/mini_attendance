@@ -17,31 +17,7 @@ const port = process.env.PORT
 const app = express()
 app.use(express.json())
 
-// Enhanced CORS configuration
-const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://localhost:5173',
-      'https://mini-attendance-z2xs.vercel.app',
-      'https://mini-attendance-z2xs-git-main-dheerajthas-projects.vercel.app',
-      process.env.FRONTEND_URL
-    ].filter(Boolean);
-    
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.warn(`CORS rejected origin: ${origin}`);
-      callback(null, true); // Allow all for debugging, remove in production
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 mongoose.connect(process.env.MONGO_URI,{
   tls: true,
