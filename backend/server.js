@@ -34,6 +34,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/attendance", attendanceRoutes);
 app.use("/api/tasks", taskRoutes);
 
-app.listen(port , () => {
-    console.log(`server is running on port ${port}`)
-})
+// app.listen(port , () => {
+//     console.log(`server is running on port ${port}`)
+// })
